@@ -7,14 +7,14 @@
 class Delay2
 {
 	public:
-		Delay2();
-		boolean finished(int index);
-		void reset(int index);
-		boolean start(int index, unsigned long timeDelay);
-		boolean start(int index, unsigned long timeDelay, int runTime);
-		boolean once(int index, unsigned long timeDelay);
-		int runCount(int index);
-		unsigned long time(int index);
+		Delay2(uint8_t timerSize);
+		boolean finished(uint8_t index);
+		void reset(uint8_t index);
+		boolean start(uint8_t index, unsigned long timeDelay);
+		boolean start(uint8_t index, unsigned long timeDelay, int runTime);
+		boolean once(uint8_t index, unsigned long timeDelay);
+		int runCount(uint8_t index);
+		unsigned long time(uint8_t index);
 	private:
 		typedef struct {
 			unsigned long _timeDelay;
@@ -22,6 +22,7 @@ class Delay2
 			int _runCount;
 			boolean _running;
 		} TimeData;
-		TimeData _timers[32];
+		static const int _timerSize;
+		TimeData *_timers;
 };
 #endif

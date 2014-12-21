@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include <Delay2.h>
 
-Delay2::Delay2()
+Delay2::Delay2(uint8_t timerSize)
 {
 	// Define variables
-
+	static const uint8_t _timerSize = timerSize;
 	/*  Here for reference
 	typedef struct {
 		unsigned long _timeDelay;
@@ -15,16 +15,16 @@ Delay2::Delay2()
 	*/
 
 	// Create timers array
-	TimeData _timers[32];
+	_timers = (TimeData *)malloc(sizeof(TimeData) * _timerSize);
 
 	// Initialize values in _timers
-	for (int i = 0; i < 32; i++)
+	for (uint8_t i = 0; i < _timerSize; i++)
 	{
 		_timers[i]._runCount = 0;
 		_timers[i]._running = false;
 	}
 }
-boolean Delay2::start(int index, unsigned long timeDelay)
+boolean Delay2::start(uint8_t index, unsigned long timeDelay)
 {
 	if (_timers[index]._running == false)
 	{
@@ -34,7 +34,7 @@ boolean Delay2::start(int index, unsigned long timeDelay)
 	}
 	return finished(index);
 }
-boolean Delay2::start(int index, unsigned long timeDelay, int runTime)
+boolean Delay2::start(uint8_t index, unsigned long timeDelay, int runTime)
 {
 	if (_timers[index]._running == false && _timers[index]._runCount < runTime)
 	{
@@ -46,12 +46,12 @@ boolean Delay2::start(int index, unsigned long timeDelay, int runTime)
 	return finished(index);
 }
 
-boolean Delay2::once(int index, unsigned long timeDelay)
+boolean Delay2::once(uint8_t index, unsigned long timeDelay)
 {
 	return start(index, timeDelay, 1);
 }
 
-boolean Delay2::finished(int index)
+boolean Delay2::finished(uint8_t index)
 {
 	if (millis() >= (_timers[index]._startMillis + _timers[index]._timeDelay) && _timers[index]._running == true)
 	{
@@ -64,18 +64,18 @@ boolean Delay2::finished(int index)
 	}
 }
 
-void Delay2::reset(int index)
+void Delay2::reset(uint8_t index)
 {
 	_timers[index]._running = false;
 	_timers[index]._runCount = 0;
 }
 
-int Delay2::runCount(int index)
+int Delay2::runCount(uint8_t index)
 {
 	return _timers[index]._runCount;
 }
 
-unsigned long Delay2::time(int index)
+unsigned long Delay2::time(uint8_t index)
 {
 	if (_timers[index]._running == true){
 		return millis() - _timers[index]._startMillis;
