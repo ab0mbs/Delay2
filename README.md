@@ -19,3 +19,20 @@ Returns the same data as ```start()```. true if the timer has finished running a
 This creates a timer at ```index``` that will run just once until you call ```reset()```. This function is just a simplified way of calling ```start()``` with a runTime of 1.
 * ```unsigned long time(int index)```  
 This will give you the milliseconds since the timer at ```index``` has started.
+
+License
+======
+Copyright Sean Culligan, 2014 Licensed under the GNU General Public License.  
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
