@@ -1,7 +1,7 @@
-Delay2 KEYWORD1
-finished KEYWORD2
-reset KEYWORD2
-start KEYWORD2
-once KEYWORD2
-time KEYWORD2
-runCount KEYWORD2
+Delay2	KEYWORD1
+finished	KEYWORD2
+reset	KEYWORD2
+start	KEYWORD2
+once	KEYWORD2
+time	KEYWORD2
+runCount	KEYWORD2
